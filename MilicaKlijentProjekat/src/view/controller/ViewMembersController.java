@@ -64,6 +64,10 @@ public class ViewMembersController {
             Member member = new Member();
             member.setSearch(mail);
             List<Member> members = Communication.getInstance().findByEmail(member);
+            if(members.isEmpty()){
+                JOptionPane.showMessageDialog(frmViewMember, "System didn't find any member with this email!");
+                return;
+            }
             MemberTableModel mtm = new MemberTableModel(members);
             frmViewMember.getTblMembers().setModel(mtm);
             TableColumn column = frmViewMember.getTblMembers().getColumnModel().getColumn(2);

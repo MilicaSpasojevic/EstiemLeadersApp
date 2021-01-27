@@ -47,12 +47,12 @@ public class LoginController {
             Communication.getInstance().connect();
             CommitteeLeader cm = Communication.getInstance().login(email, password);
             ViewCordinator.getInstance().addParam("Leader", cm);
-            JOptionPane.showMessageDialog(frmLogin, "Welcome "+cm.getFirstname());
+            JOptionPane.showMessageDialog(frmLogin, "Successfully logged in, Welcome "+cm.getFirstname());
             ViewCordinator.getInstance().openMainForm();
             frmLogin.dispose();
             }
             catch(Exception e){
-            JOptionPane.showMessageDialog(frmLogin, "Error: "+e.getMessage());
+            JOptionPane.showMessageDialog(frmLogin, "Unsuccessfully logging : "+e.getMessage());
             
             }
         }});

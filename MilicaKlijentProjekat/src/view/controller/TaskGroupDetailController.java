@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import view.coordinator.ViewCordinator;
 import view.form.FrmTaskGroupDetails;
 import view.form.components.table.MemberTableModel;
+import view.form.components.table.TableColorCellRenderer;
 import view.form.components.table.TaskTableModel;
 
 /**
@@ -71,7 +72,8 @@ public class TaskGroupDetailController {
         }
         TaskTableModel tm = new TaskTableModel(tasks);
         frmTaskGroup.getTblTasks().setModel(tm);
-        
+        TableColorCellRenderer renderer = new TableColorCellRenderer();
+        frmTaskGroup.getTblTasks().setDefaultRenderer(Object.class, renderer);
         List<Member> allMembers = new ArrayList<>();
         try {
             allMembers = Communication.getInstance().getAllMembers();

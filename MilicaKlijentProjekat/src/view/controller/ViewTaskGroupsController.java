@@ -72,8 +72,19 @@ public class ViewTaskGroupsController {
             
             try{
                 List<TaskGroup> groups = Communication.getInstance().findByName(tg);
-                TaskGroupTableModel tgm = new TaskGroupTableModel(groups);
+                if(groups.size()>0){
+                    TaskGroupTableModel tgm = new TaskGroupTableModel(groups);
                 frmViewTask.getTblTaskGroups().setModel(tgm);
+                } else {
+                    JOptionPane.showMessageDialog(frmViewTask, "System didn't find any task group with this name!");
+                    prepareTable();
+                     frmViewTask.getTxtTaskGroup().setText("");
+                }
+               
+                
+                
+                
+                
             }catch(SocketException se){
             JOptionPane.showMessageDialog(frmViewTask, "Server is closed, Goodbye");
             System.exit(0);

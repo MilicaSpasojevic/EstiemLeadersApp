@@ -66,7 +66,7 @@ public class FrmViewMembers extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblMembers);
 
-        btnEdit.setText("Edit");
+        btnEdit.setText("Details");
 
         jLabel1.setText("Find member by ESTIEM email:");
 

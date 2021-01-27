@@ -63,7 +63,7 @@ public class MemberController {
             JOptionPane.showMessageDialog(frmMember, "Server is closed, Goodbye");
             System.exit(0);
         }catch(Exception e){
-            JOptionPane.showMessageDialog(frmMember, "Error: "+e.getMessage());
+            JOptionPane.showMessageDialog(frmMember, "Unsuccessfully adding member: "+e.getMessage());
         }
             }
         });
@@ -72,6 +72,10 @@ public class MemberController {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try{
+                    if(frmMember.getTxtEmail().getText().trim().equals("") || frmMember.getTxtName().getText().trim().equals("") || frmMember.getTxtSurname().getText().trim().equals("") || frmMember.getTxtYear().getText().trim().equals("")){
+                JOptionPane.showMessageDialog(frmMember, "Text fields can't be empty!");
+                return;
+            }
             Member m = new Member();
             m.setEmail(frmMember.getTxtEmail().getText().trim());
             m.setFirstname(frmMember.getTxtName().getText().trim());
@@ -82,6 +86,7 @@ public class MemberController {
             m.setYear(Integer.parseInt(frmMember.getTxtYear().getText().trim()));
             Long id = ((Member)ViewCordinator.getInstance().getParam("Member")).getId();
             m.setId(id);
+            validateMember(m);
             Communication.getInstance().editMember(m);
             ViewCordinator.getInstance().refreshMembers();
             JOptionPane.showMessageDialog(frmMember, "Member edited successfully!");
@@ -90,7 +95,7 @@ public class MemberController {
             System.exit(0);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(frmMember, "Error: "+e.getMessage());
+            JOptionPane.showMessageDialog(frmMember, "Unsucessfully updating: "+e.getMessage());
         }
             }
         });
@@ -99,6 +104,10 @@ public class MemberController {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try{
+                    if(frmMember.getTxtEmail().getText().trim().equals("") || frmMember.getTxtName().getText().trim().equals("") || frmMember.getTxtSurname().getText().trim().equals("") || frmMember.getTxtYear().getText().trim().equals("")){
+                JOptionPane.showMessageDialog(frmMember, "Text fields can't be empty!");
+                return;
+            }
             Member m = new Member();
             m.setEmail(frmMember.getTxtEmail().getText().trim());
             m.setFirstname(frmMember.getTxtName().getText().trim());
@@ -109,6 +118,7 @@ public class MemberController {
             m.setYear(Integer.parseInt(frmMember.getTxtYear().getText().trim()));
             Long id = ((Member)ViewCordinator.getInstance().getParam("Member")).getId();
             m.setId(id);
+            validateMember(m);
             Communication.getInstance().deleteMember(m);
             ViewCordinator.getInstance().refreshMembers();
             JOptionPane.showMessageDialog(frmMember, "Member deleted successfully!");
@@ -117,7 +127,7 @@ public class MemberController {
             System.exit(0);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(frmMember, "Error: "+e.getMessage());
+            JOptionPane.showMessageDialog(frmMember, "Unsuccessfully deleting: "+e.getMessage());
         }
             }
         });
@@ -174,12 +184,12 @@ public class MemberController {
     
     private void validateMember(Member m) throws Exception {
         if(!m.getEmail().endsWith("@estiem.org")){
-            throw new Exception("Estiem mail need to ends with 'estiem@.org'");
+            throw new Exception("Estiem mail needs to end with 'estiem@.org'");
         }
         int year = Calendar.getInstance().get(Calendar.YEAR);
         Date date = new Date();
         if(year<m.getYear()){
-            throw new Exception("Year of entry need to be in past!");
+            throw new Exception("Year of entry needs to be in past!");
         }
         
         if(m.isIsLeader()){

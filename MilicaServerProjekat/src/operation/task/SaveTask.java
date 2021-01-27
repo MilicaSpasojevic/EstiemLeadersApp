@@ -17,6 +17,7 @@ public class SaveTask extends AbstractGenericOperation{
 
     @Override
     protected void preconditions(Object param) throws Exception {
+        
     }
 
     @Override

@@ -6,6 +6,7 @@
 package operation.taskGroup;
 
 import domain.TaskGroup;
+import java.util.List;
 import operation.AbstractGenericOperation;
 
 /**
@@ -16,6 +17,14 @@ public class SaveTaskGroup extends AbstractGenericOperation{
 
     @Override
     protected void preconditions(Object param) throws Exception {
+        GetAllTaskGroup operation = new GetAllTaskGroup();
+        operation.execute(new TaskGroup());
+        List<TaskGroup> tgs = operation.getTaskGroups();
+        for(TaskGroup taskGroup : tgs){
+          if(taskGroup.getName().equals(((TaskGroup) param).getName())){
+            throw new Exception("TaskGroup needs to have unique name");
+        }
+        }
     }
 
     @Override

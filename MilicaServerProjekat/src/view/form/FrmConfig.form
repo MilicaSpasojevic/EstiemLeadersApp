@@ -35,13 +35,13 @@
                       </Group>
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtURL" min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="txtPassword" min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="txtUsername" min="-2" pref="192" max="-2" attributes="0"/>
+                          <Component id="txtUsername" alignment="0" pref="304" max="32767" attributes="0"/>
+                          <Component id="txtPassword" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtURL" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="60" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

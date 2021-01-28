@@ -161,8 +161,21 @@ public class Task implements GenericEntity{
         if (this.taskType != other.taskType) {
             return false;
         }
+        if (this.taskStatus != other.taskStatus) {
+            return false;
+        }
+        if (!Objects.equals(this.startDate, other.startDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.finishDate, other.finishDate)) {
+            return false;
+        }
         return true;
     }
+
+    
+
+ 
 
     @Override
     public String toString() {
@@ -216,6 +229,9 @@ public class Task implements GenericEntity{
         while(rs.next()){
             Task t = new Task();
                     t.setId(rs.getLong("id"));
+                    TaskGroup tg = new TaskGroup();
+                    tg.setId(rs.getLong("taskgroupId"));
+                    t.setTg(tg);
                     t.setDeadline(rs.getDate("deadline"));
                     t.setDescription(rs.getString("description"));
                     t.setTaskType(TaskType.valueOf(rs.getString("tasktype")));
@@ -258,12 +274,13 @@ public class Task implements GenericEntity{
 
     @Override
     public String getObjectCase() {
-        return "id="+id;
+        System.out.println(tg.getId());
+        return "id="+id+" and taskGroupid="+tg.getId();
     }
 
     @Override
     public String getSearchCase() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "id="+id+" and taskGroupid="+tg.getId();
     }
     
     

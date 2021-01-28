@@ -67,6 +67,7 @@ public class TaskController {
            
             ttm.addTask(task);
             JOptionPane.showMessageDialog(frmTask, "Task successfully added!");
+            frmTask.dispose();
            
             
             
@@ -136,12 +137,17 @@ public class TaskController {
             t.setTitle(frmTask.getTxtTitle2().getText());
             t.setTg((TaskGroup) ViewCordinator.getInstance().getParam("TaskGroup"));
             t.setId(Long.parseLong(frmTask.getTxtID().getText()));
+            int answer = JOptionPane.showConfirmDialog(frmTask, "Do you really want to delete this task?");
+            if(answer!=0){
+                return;
+            }
             TaskTableModel ttm = (TaskTableModel) ViewCordinator.getInstance().getFrmTask().getTblTasks().getModel();
             ttm.deleteTask(t);
             TaskGroup tg = (TaskGroup) ViewCordinator.getInstance().getParam("TaskGroup");
              tg.getTasks().remove(t);
              ViewCordinator.getInstance().addParam("TaskGroup", tg);
             JOptionPane.showMessageDialog(frmTask, "Task successfully deleted!");
+            frmTask.dispose();
            
             
             

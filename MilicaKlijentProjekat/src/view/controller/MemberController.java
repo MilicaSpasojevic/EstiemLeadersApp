@@ -48,6 +48,12 @@ public class MemberController {
                 JOptionPane.showMessageDialog(frmMember, "Text fields can't be empty!");
                 return;
             }
+                     try{
+                        int year = Integer.parseInt(frmMember.getTxtYear().getText().trim());
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(frmMember, "Year needs to be a valid number!");
+                        return;
+                    }
             Member m = new Member();
             m.setEmail(frmMember.getTxtEmail().getText().trim());
             m.setFirstname(frmMember.getTxtName().getText().trim());
@@ -59,6 +65,7 @@ public class MemberController {
             validateMember(m);
             Communication.getInstance().addMember(m);
             JOptionPane.showMessageDialog(frmMember, "Member added successfully!");
+            frmMember.dispose();
         }catch(SocketException se){
             JOptionPane.showMessageDialog(frmMember, "Server is closed, Goodbye");
             System.exit(0);
@@ -76,6 +83,12 @@ public class MemberController {
                 JOptionPane.showMessageDialog(frmMember, "Text fields can't be empty!");
                 return;
             }
+                    try{
+                        int year = Integer.parseInt(frmMember.getTxtYear().getText().trim());
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(frmMember, "Year needs to be a valid number!");
+                        return;
+                    }
             Member m = new Member();
             m.setEmail(frmMember.getTxtEmail().getText().trim());
             m.setFirstname(frmMember.getTxtName().getText().trim());
@@ -90,6 +103,7 @@ public class MemberController {
             Communication.getInstance().editMember(m);
             ViewCordinator.getInstance().refreshMembers();
             JOptionPane.showMessageDialog(frmMember, "Member edited successfully!");
+            frmMember.dispose();
         }catch(SocketException se){
             JOptionPane.showMessageDialog(frmMember, "Server is closed, Goodbye");
             System.exit(0);
@@ -108,6 +122,12 @@ public class MemberController {
                 JOptionPane.showMessageDialog(frmMember, "Text fields can't be empty!");
                 return;
             }
+                    try{
+                        int year = Integer.parseInt(frmMember.getTxtYear().getText().trim());
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(frmMember, "Year needs to be a valid number!");
+                        return;
+                    }
             Member m = new Member();
             m.setEmail(frmMember.getTxtEmail().getText().trim());
             m.setFirstname(frmMember.getTxtName().getText().trim());
@@ -119,9 +139,14 @@ public class MemberController {
             Long id = ((Member)ViewCordinator.getInstance().getParam("Member")).getId();
             m.setId(id);
             validateMember(m);
+            int answer = JOptionPane.showConfirmDialog(frmMember, "Do you really want to delete this member?");
+            if(answer!=0){
+                return;
+            }
             Communication.getInstance().deleteMember(m);
             ViewCordinator.getInstance().refreshMembers();
             JOptionPane.showMessageDialog(frmMember, "Member deleted successfully!");
+            frmMember.dispose();
         }catch(SocketException se){
             JOptionPane.showMessageDialog(frmMember, "Server is closed, Goodbye");
             System.exit(0);
@@ -187,6 +212,7 @@ public class MemberController {
             throw new Exception("Estiem mail needs to end with 'estiem@.org'");
         }
         int year = Calendar.getInstance().get(Calendar.YEAR);
+        
         Date date = new Date();
         if(year<m.getYear()){
             throw new Exception("Year of entry needs to be in past!");

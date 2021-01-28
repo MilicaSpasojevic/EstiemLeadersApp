@@ -6,6 +6,7 @@
 package operation.member;
 
 import domain.Member;
+import java.util.List;
 import operation.AbstractGenericOperation;
 
 /**
@@ -20,6 +21,12 @@ public class SaveMember extends AbstractGenericOperation{
             throw new Exception("Invalid member data!");
             
         }
+            List<Member> members = repository.getAll(new Member());
+            for(Member m : members){
+                if(m.getEmail().equals(((Member)param).getEmail())){
+                    throw new Exception("Member with this email already exists!");
+                }
+            }
     }
 
     @Override

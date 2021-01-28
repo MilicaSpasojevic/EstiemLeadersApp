@@ -97,12 +97,14 @@ public class TaskTableModel extends AbstractTableModel{
     }
 
     public void deleteTask(Task t) {
+        Task task = new Task();
         for(Task tt : tasks){
             if(tt.getId().equals(t.getId())){
-                tasks.remove(tt);
-                fireTableDataChanged();
+                task=tt;
             }
         }
+        tasks.remove(task);
+        fireTableDataChanged();
         
     }
 

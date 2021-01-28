@@ -61,6 +61,22 @@ public class TaskGroupDetailController {
         }else JOptionPane.showMessageDialog(frmTaskGroup, "You must select task first!");
             }
         });
+        
+        frmTaskGroup.addBtnSaveListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try{
+                    TaskTableModel ttm = (TaskTableModel) frmTaskGroup.getTblTasks().getModel();
+                    List<Task> tasks = ttm.getTasks();
+                    TaskGroup taskGroup = (TaskGroup) ViewCordinator.getInstance().getParam("TaskGroup");
+                    taskGroup.setTasks(tasks);
+                    Communication.getInstance().updateTaskGroup(taskGroup);
+                    JOptionPane.showMessageDialog(frmTaskGroup, "Task group successfully updated!");
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(frmTaskGroup, "Error: "+e.getMessage());
+                }
+            }
+        });
     }
 
     public void prepareView() {

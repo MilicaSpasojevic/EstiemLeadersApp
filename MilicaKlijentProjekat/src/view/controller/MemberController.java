@@ -196,7 +196,7 @@ public class MemberController {
         List<Member> members = Communication.getInstance().getAllMembers();
         for(Member memb : members){
             if(memb.getTaskGroup().getId().equals(m.getTaskGroup().getId())){
-                if(memb.isIsLeader()){
+                if(memb.isIsLeader() && !memb.getId().equals(m.getId())){
                     throw new Exception("This task group already has a leader!");
                 }
             }

@@ -64,9 +64,11 @@ public class TaskController {
             
             TaskStatus status = (TaskStatus) frmTask.getCbStatus().getSelectedItem();
             Task task = new Task(Long.parseLong(id), (TaskGroup)ViewCordinator.getInstance().getParam("TaskGroup"), title, description, deadLine, type, status, startDate, finishDate);
-            communication.Communication.getInstance().addTask(task);
+           // communication.Communication.getInstance().addTask(task);
             ttm.addTask(task);
             JOptionPane.showMessageDialog(frmTask, "Task successfully added!");
+           // frmTask.dispose();
+          //  JOptionPane.showMessageDialog(ViewCordinator.getInstance().getFrmTask(), "Task group successfully updateted!");
             
             
         }catch(SocketException se){
@@ -102,9 +104,11 @@ public class TaskController {
             
             TaskTableModel ttm = (TaskTableModel) ViewCordinator.getInstance().getFrmTask().getTblTasks().getModel();
             
-            communication.Communication.getInstance().updateTask(t);
+           // communication.Communication.getInstance().updateTask(t);
             ttm.editTask(t);
-            JOptionPane.showMessageDialog(frmTask, "Task successfully ipdated!");
+            JOptionPane.showMessageDialog(frmTask, "Task successfully updated!");
+           // frmTask.dispose();
+           // JOptionPane.showMessageDialog(ViewCordinator.getInstance().getFrmTask(), "Task group successfully updateted!");
             
             
             
@@ -136,13 +140,17 @@ public class TaskController {
             t.setTg((TaskGroup) ViewCordinator.getInstance().getParam("TaskGroup"));
             t.setId(Long.parseLong(frmTask.getTxtID().getText()));
             TaskTableModel ttm = (TaskTableModel) ViewCordinator.getInstance().getFrmTask().getTblTasks().getModel();
-            
-            communication.Communication.getInstance().deleteTask(t);
-             TaskGroup tg = (TaskGroup) ViewCordinator.getInstance().getParam("TaskGroup");
+            ttm.deleteTask(t);
+            TaskGroup tg = (TaskGroup) ViewCordinator.getInstance().getParam("TaskGroup");
              tg.getTasks().remove(t);
-            ViewCordinator.getInstance().addParam("TaskGroup", tg);
-            ViewCordinator.getInstance().refreshTaskGroupDetailsView();
+             ViewCordinator.getInstance().addParam("TaskGroup", tg);
+          /*  communication.Communication.getInstance().deleteTask(t);
+             
+            
+            ViewCordinator.getInstance().refreshTaskGroupDetailsView();*/
             JOptionPane.showMessageDialog(frmTask, "Task successfully deleted!");
+           // frmTask.dispose();
+           // JOptionPane.showMessageDialog(ViewCordinator.getInstance().getFrmTask(), "Task group successfully updateted!");
             
             
         }catch(SocketException se){

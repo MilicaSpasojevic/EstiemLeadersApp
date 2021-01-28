@@ -127,7 +127,7 @@ public class Communication {
         } else throw response.getException();
     }
     
-    public void addTask(Task task) throws Exception {
+   /* public void addTask(Task task) throws Exception {
         Request request = new Request(Operation.ADD_TASK,task);
         sender.send(request);
         
@@ -155,7 +155,7 @@ public class Communication {
         if(response.getException()==null){
             
         } else throw response.getException();
-    }
+    }*/
 
     public void editMember(Member m) throws Exception {
         Request request = new Request(Operation.UPDATE_MEMBER,m);
@@ -204,6 +204,16 @@ public class Communication {
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
             return socket;
+        } else throw response.getException();
+    }
+
+    public void updateTaskGroup(TaskGroup taskGroup) throws Exception {
+        Request request = new Request(Operation.SAVE_ALL_TASKS,taskGroup);
+        sender.send(request);
+        
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
         } else throw response.getException();
     }
     

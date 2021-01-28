@@ -25,19 +25,6 @@ public class Communication {
     private Sender sender;
     
     private Communication(){
-       /* try{
-            socket = new Socket("localhost", 9000);
-            receiver = new Receiver(socket);
-            sender = new Sender(socket);
-           // WaitingForResponse waiting = new WaitingForResponse(receiver);
-           // waiting.start();
-        }catch(SocketException se){
-            System.out.println(se.getMessage());
-            System.exit(0);
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }*/
     }
     
     public void connect() throws Exception{
@@ -126,36 +113,6 @@ public class Communication {
             return (List<Member>) response.getResult();
         } else throw response.getException();
     }
-    
-   /* public void addTask(Task task) throws Exception {
-        Request request = new Request(Operation.ADD_TASK,task);
-        sender.send(request);
-        
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        } else throw response.getException();
-    }
-
-    public void updateTask(Task t) throws Exception {
-        Request request = new Request(Operation.UPDATE_TASK,t);
-        sender.send(request);
-        
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        } else throw response.getException();
-    }
-
-    public void deleteTask(Task t) throws Exception {
-        Request request = new Request(Operation.DELETE_TASK,t);
-        sender.send(request);
-        
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        } else throw response.getException();
-    }*/
 
     public void editMember(Member m) throws Exception {
         Request request = new Request(Operation.UPDATE_MEMBER,m);

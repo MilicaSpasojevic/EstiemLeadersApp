@@ -72,7 +72,10 @@ public class TaskGroupDetailController {
                     taskGroup.setTasks(tasks);
                     Communication.getInstance().updateTaskGroup(taskGroup);
                     JOptionPane.showMessageDialog(frmTaskGroup, "Task group successfully updated!");
-                }catch(Exception e){
+                }catch(SocketException se){
+            JOptionPane.showMessageDialog(frmTaskGroup, "Server is closed, Goodbye");
+            System.exit(0);
+            }catch(Exception e){
                     JOptionPane.showMessageDialog(frmTaskGroup, "Error: "+e.getMessage());
                 }
             }

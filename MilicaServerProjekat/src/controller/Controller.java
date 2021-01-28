@@ -22,19 +22,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import operation.AbstractGenericOperation;
-import operation.leader.GetAllLeaders;
+import operation.leader.LogInLeader;
 import operation.localGroup.GetAllLocalGroups;
 import operation.member.DeleteMember;
 import operation.member.EditMember;
 import operation.member.FindByEmail;
 import operation.member.GetAllMembers;
 import operation.member.SaveMember;
-import operation.task.DeleteTask;
-import operation.task.EditTask;
-import operation.task.SaveTask;
 import operation.taskGroup.FindByName;
 import operation.taskGroup.GetAllTaskGroup;
 import operation.taskGroup.SaveTaskGroup;
+import operation.taskGroup.UpdateTaskGroup;
 import repository.db.DbRepository;
 import threads.Server;
 
@@ -88,16 +86,14 @@ public class Controller {
     }
         
     public CommitteeLeader login(String email, String password, Socket socket) throws Exception{
-        GetAllLeaders operation = new GetAllLeaders();
-        operation.execute(new CommitteeLeader());
-        List<CommitteeLeader> leaders = operation.getLeaders();
-        for(CommitteeLeader cm : leaders){
-            if(cm.getEmail().equals(email) && cm.getPassword().equals(password)){
-                activeCl.put(email, socket);
-                return cm;
-            }
-        }
-        throw new Exception("Committee leader doesn't exists!");
+        LogInLeader operation = new LogInLeader();
+        CommitteeLeader cml = new CommitteeLeader();
+        cml.setEmail(email);
+        cml.setPassword(password);
+        operation.execute(cml);
+        cml = operation.getCommitteeLeader();
+        activeCl.put(cml.getEmail(), socket);
+       return cml;
     }
 
     public List<TaskGroup> getAllTaskGroups() throws Exception {
@@ -124,7 +120,7 @@ public class Controller {
         return operation.getMembers();
     }
     
-    public void addTask(Task task) throws Exception {
+    /*public void addTask(Task task) throws Exception {
         SaveTask operation = new SaveTask();
          operation.execute(task);
     }
@@ -137,7 +133,7 @@ public class Controller {
     public void deleteTask(Task task) throws Exception {
         DeleteTask operation = new DeleteTask();
         operation.execute(task);
-    }
+    }*/
 
     public void editMember(Member memberUpd) throws Exception {
         EditMember operation = new EditMember();
@@ -164,6 +160,11 @@ public class Controller {
     public void logOutUser(CommitteeLeader cmOut) throws IOException{
         activeCl.remove(cmOut.getEmail());
         
+    }
+
+    public void updateTaskGroup(TaskGroup taskGroup) throws Exception {
+        UpdateTaskGroup operation = new UpdateTaskGroup();
+        operation.execute(taskGroup);
     }
     
     

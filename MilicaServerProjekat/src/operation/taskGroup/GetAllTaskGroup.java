@@ -27,6 +27,9 @@ public class GetAllTaskGroup extends AbstractGenericOperation{
         taskGroups = repository.getAll((TaskGroup) param);
         for(TaskGroup tg : taskGroups){
             tg.setTasks(repository.getAllBy(new Task(), "taskgroupId", tg.getId().toString()));
+            for(Task task : tg.getTasks()){
+                task.setTg(tg);
+            }
         }
     }
 

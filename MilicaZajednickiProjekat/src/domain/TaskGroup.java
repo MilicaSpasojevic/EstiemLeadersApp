@@ -88,9 +88,7 @@ public class TaskGroup implements GenericEntity{
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-      /*  if (!Objects.equals(this.tasks, other.tasks)) {
-            return false;
-        }*/
+      
         return true;
     }
 

@@ -91,6 +91,9 @@ public class Controller {
         cml.setPassword(password);
         operation.execute(cml);
         cml = operation.getCommitteeLeader();
+        if(activeCl.containsKey(cml.getEmail())){
+            throw new Exception("This committee leader is already active!");
+        }
         activeCl.put(cml.getEmail(), socket);
        return cml;
     }

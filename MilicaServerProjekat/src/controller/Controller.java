@@ -10,7 +10,6 @@ import communication.Request;
 import communication.Response;
 import communication.Sender;
 import domain.CommitteeLeader;
-import domain.Engagement;
 import domain.LocalGroup;
 import domain.Member;
 import domain.Task;
@@ -120,20 +119,7 @@ public class Controller {
         return operation.getMembers();
     }
     
-    /*public void addTask(Task task) throws Exception {
-        SaveTask operation = new SaveTask();
-         operation.execute(task);
-    }
-    
-    public void editTask(Task task) throws Exception {
-        EditTask operation = new EditTask();
-        operation.execute(task);
-    }
-    
-    public void deleteTask(Task task) throws Exception {
-        DeleteTask operation = new DeleteTask();
-        operation.execute(task);
-    }*/
+
 
     public void editMember(Member memberUpd) throws Exception {
         EditMember operation = new EditMember();

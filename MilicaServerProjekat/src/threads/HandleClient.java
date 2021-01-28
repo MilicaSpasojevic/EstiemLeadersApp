@@ -66,18 +66,6 @@ public class HandleClient extends Thread{
                         case GET_ALL_TASK_GROUPS:
                             response.setResult(Controller.getInstance().getAllTaskGroups());
                             break;
-                        /*case ADD_TASK:
-                            Task task = (Task) request.getArgument();
-                            Controller.getInstance().addTask(task);
-                            break;
-                        case DELETE_TASK:
-                            Task taskDel = (Task) request.getArgument();
-                            Controller.getInstance().deleteTask(taskDel);
-                            break;
-                        case UPDATE_TASK:
-                            Task taskUpd = (Task) request.getArgument();
-                            Controller.getInstance().editTask(taskUpd);
-                            break;*/
                         case UPDATE_MEMBER:
                             Member memberUpd = (Member) request.getArgument();
                             Controller.getInstance().editMember(memberUpd);
